@@ -1,0 +1,19 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "task": "projeto todo list com vue",
+      "inProgress": true
+    },
+    {
+      "id": 2,
+      "task": "projeto com react + TS",
+      "inProgress": true
+    },
+    {
+      "id": 3,
+      "task": "planejamento semanal",
+      "inProgress": true
+    }
+  ]
+}
