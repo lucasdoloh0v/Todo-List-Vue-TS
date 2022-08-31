@@ -1,27 +1,48 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <p v-if="loading">Carregando...</p>
+
+  <template v-else>
+    <HeaderContent />
+    <main>
+    </main>
+  </template>
 </template>
 
 <script lang="ts">
+import axios from 'axios';
+
 import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import HeaderContent from './components/HeaderContent.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    HelloWorld,
+    HeaderContent,
+  },
+
+  data() {
+    return {
+      loading: false,
+    };
+  },
+
+  created() {
+    this.loading = true;
+    axios.get('http://localhost:3000/todos')
+      .then((res) => {
+        this.$store.commit('storeTodos', res.data);
+      })
+      .finally(() => {
+        this.loading = false;
+      });
   },
 });
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+* {
+  font-family: sans-serif;
+  background: #000;
+  color: white;
 }
 </style>
